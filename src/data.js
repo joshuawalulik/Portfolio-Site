@@ -100,7 +100,7 @@ export const education = [
     school: 'Arizona State University — W. P. Carey School of Business',
     degree: 'B.S. Computer Information Systems',
     dates: '2019 – 2023',
-    details: 'Minor in Psychology · Certificate in Applied Business Data Analytics · GPA 3.25',
+    details: 'Minor in Psychology · Certificate in Applied Business Data Analytics',
   },
 ]
 
