@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { profile, experience, projects, skills, education, certificates } from './data.js'
 
 const GitHubIcon = () => (
@@ -20,36 +20,44 @@ const ArrowIcon = () => (
 )
 
 function Section({ id, title, children }) {
-  const ref = useRef(null)
-
-  useEffect(() => {
-    const el = ref.current
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('visible')
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.1 },
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section className="section" id={id} ref={ref}>
-      <div className="container">
-        <h2>{title}</h2>
-        {children}
+    <section className="screen section" id={id}>
+      <div className="section-scroll">
+        <div className="container">
+          <h2>{title}</h2>
+          {children}
+        </div>
       </div>
     </section>
   )
 }
 
 const navItems = ['Experience', 'Projects', 'Skills', 'Education']
+const screenIds = ['top', ...navItems.map((item) => item.toLowerCase())]
 
 export default function App() {
+  const [active, setActive] = useState('top')
+
+  useEffect(() => {
+    // Screens are exactly (viewport - nav) tall and snap to multiples of that
+    // height, so the active section falls straight out of the scroll offset.
+    const update = () => {
+      const snapHeight = window.innerHeight - 64
+      const index = Math.min(
+        screenIds.length - 1,
+        Math.max(0, Math.round(window.scrollY / snapHeight)),
+      )
+      setActive(screenIds[index])
+    }
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [])
+
   return (
     <>
       <nav className="nav">
@@ -60,14 +68,20 @@ export default function App() {
           <ul className="nav-links">
             {navItems.map((item) => (
               <li key={item}>
-                <a href={`#${item.toLowerCase()}`}>{item}</a>
+                <a
+                  href={`#${item.toLowerCase()}`}
+                  className={active === item.toLowerCase() ? 'active' : undefined}
+                >
+                  {item}
+                </a>
               </li>
             ))}
           </ul>
         </div>
       </nav>
 
-      <header className="hero container" id="top">
+      <header className="screen hero" id="top">
+        <div className="container">
         <h1>{profile.name}</h1>
         <div className="tagline">{profile.title}</div>
         <p className="bio">{profile.bio}</p>
@@ -82,6 +96,7 @@ export default function App() {
           <a className="btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">
             <LinkedInIcon /> LinkedIn
           </a>
+          </div>
         </div>
       </header>
 
