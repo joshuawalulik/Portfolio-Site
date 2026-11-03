@@ -54,25 +54,25 @@ export const experience = [
 
 export const projects = [
   {
-    name: 'Twitter Scraper',
-    tech: ['Python', 'Twitter API', 'Jupyter'],
+    name: 'JobSearcher',
+    tech: ['Python', 'FastAPI', 'HTMX', 'SQLite', 'MCP'],
     description:
-      'Analyzes tweets via the Twitter API — word frequency, sentiment, and location analysis through geospatial data. Built as an honors project.',
-    link: 'https://github.com/joshuawalulik/Twitter-Scraper',
+      'A job-search pipeline that scrapes Greenhouse/Lever/Ashby boards, ranks postings with a deterministic, fully explainable scoring engine, and tracks applications end to end — 300+ tests, an MCP server for AI-assisted tailoring, and a YAML→DOCX resume renderer.',
+    link: 'https://github.com/joshuawalulik/jobsearcher',
+  },
+  {
+    name: 'Oura Partner Dashboard',
+    tech: ['TypeScript', 'Cloudflare Workers', 'Hono', 'OAuth2'],
+    description:
+      'A serverless health dashboard on Cloudflare Workers integrating the Oura API v2 over OAuth2 — two independent auth layers (Cloudflare Access + in-Worker JWT verification), field allowlisting, and a CI pipeline with post-deploy smoke tests.',
+    link: 'https://github.com/joshuawalulik/oura-dashboard',
   },
   {
     name: 'Portfolio Website',
     tech: ['React', 'Vite'],
     description:
-      'This site — a fast, single-page portfolio built with React and deployed on GitHub Pages.',
+      'This site — a fast, single-page portfolio built with React and deployed on GitHub Pages, with a build-time CSP injected via a custom Vite plugin.',
     link: 'https://github.com/joshuawalulik/Portfolio-Site',
-  },
-  {
-    name: 'Point of Sale Application',
-    tech: ['Python', 'Tkinter'],
-    description:
-      'A GUI point-of-sale application supporting product sales, ordering, and transaction cancellation.',
-    link: 'https://github.com/joshuawalulik/Engage-Business-Online-App',
   },
 ]
 

@@ -19,7 +19,7 @@
 
 html {
   scroll-padding-top: 64px;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 
 /* One full viewport per section (64px = nav height) */
@@ -27,7 +27,6 @@ html {
   height: calc(100vh - 64px);
   height: calc(100dvh - 64px);
   scroll-snap-align: start;
-  scroll-snap-stop: always;
   display: flex;
   flex-direction: column;
   overflow: hidden;
