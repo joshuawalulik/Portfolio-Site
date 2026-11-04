@@ -19,6 +19,12 @@ const ArrowIcon = () => (
   </svg>
 )
 
+const ChevronDownIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+    <path d="m3.5 6 4.5 4.5L12.5 6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
 function Section({ id, title, children }) {
   return (
     <section className="screen section" id={id}>
@@ -37,6 +43,24 @@ const screenIds = ['top', ...navItems.map((item) => item.toLowerCase())]
 
 export default function App() {
   const [active, setActive] = useState('top')
+
+  useEffect(() => {
+    // Play the hero entrance only once the page is actually visible; content
+    // stays fully readable without this class (no JS, hidden tab, crawler).
+    const play = () => document.documentElement.classList.add('hero-enter')
+    if (document.visibilityState === 'visible') {
+      play()
+      return undefined
+    }
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') {
+        play()
+        document.removeEventListener('visibilitychange', onVisible)
+      }
+    }
+    document.addEventListener('visibilitychange', onVisible)
+    return () => document.removeEventListener('visibilitychange', onVisible)
+  }, [])
 
   useEffect(() => {
     // Screens are exactly (viewport - nav) tall and snap to multiples of that
@@ -58,12 +82,23 @@ export default function App() {
     }
   }, [])
 
+  const initials = profile.name
+    .split(' ')
+    .map((word) => word[0])
+    .join('')
+
   return (
     <>
+      <a className="skip-link" href="#experience">
+        Skip to content
+      </a>
       <nav className="nav">
         <div className="container nav-inner">
           <a className="nav-brand" href="#top">
-            {profile.name}
+            <span className="brand-full">{profile.name}</span>
+            <span className="brand-short" aria-hidden="true">
+              {initials}
+            </span>
           </a>
           <ul className="nav-links">
             {navItems.map((item) => (
@@ -71,6 +106,7 @@ export default function App() {
                 <a
                   href={`#${item.toLowerCase()}`}
                   className={active === item.toLowerCase() ? 'active' : undefined}
+                  aria-current={active === item.toLowerCase() ? 'true' : undefined}
                 >
                   {item}
                 </a>
@@ -82,21 +118,24 @@ export default function App() {
 
       <header className="screen hero" id="top">
         <div className="container">
-        <h1>{profile.name}</h1>
-        <div className="tagline">{profile.title}</div>
-        <p className="bio">{profile.bio}</p>
-        <div className="meta">{profile.location}</div>
-        <div className="hero-links">
-          <a className="btn primary" href={`mailto:${profile.email}`}>
-            Get in touch
-          </a>
-          <a className="btn" href={profile.links.github} target="_blank" rel="noreferrer">
-            <GitHubIcon /> GitHub
-          </a>
-          <a className="btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">
-            <LinkedInIcon /> LinkedIn
-          </a>
+          <h1>{profile.name}</h1>
+          <div className="tagline">{profile.title}</div>
+          <p className="bio">{profile.bio}</p>
+          <div className="meta">{profile.location}</div>
+          <div className="hero-links">
+            <a className="btn primary" href={`mailto:${profile.email}`}>
+              Get in touch
+            </a>
+            <a className="btn" href={profile.links.github} target="_blank" rel="noreferrer">
+              <GitHubIcon /> GitHub
+            </a>
+            <a className="btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">
+              <LinkedInIcon /> LinkedIn
+            </a>
           </div>
+        </div>
+        <div className="scroll-cue">
+          <ChevronDownIcon />
         </div>
       </header>
 
@@ -141,18 +180,20 @@ export default function App() {
       </Section>
 
       <Section id="skills" title="Skills">
-        {skills.map((group) => (
-          <div className="skill-group" key={group.group}>
-            <h3>{group.group}</h3>
-            <div className="pills">
-              {group.items.map((item) => (
-                <span className="pill" key={item}>
-                  {item}
-                </span>
-              ))}
+        <div className="skills-grid">
+          {skills.map((group) => (
+            <div className="skill-group" key={group.group}>
+              <h3>{group.group}</h3>
+              <div className="pills">
+                {group.items.map((item) => (
+                  <span className="pill" key={item}>
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </Section>
 
       <Section id="education" title="Education">
@@ -166,7 +207,7 @@ export default function App() {
             </div>
           </div>
         ))}
-        <div style={{ marginTop: 32 }}>
+        <div className="certs">
           {certificates.map((cert) => (
             <div className="cert" key={cert.name}>
               <div>
