@@ -8,7 +8,7 @@ export const profile = {
   name: 'Joshua Walulik',
   title: 'Software Engineer',
   location: 'Scottsdale, AZ',
-  availability: 'Open to new opportunities',
+  availability: 'Open to new opportunities in New York City',
   email: 'joshuawalulik@gmail.com',
   bio: 'Software Engineer with 3+ years at Wells Fargo building React and TypeScript front-ends, Node.js Experience APIs, and .NET and Java Spring Boot microservices. Owned enhancements on a core loan origination service processing 25,000 to 30,000 applications daily and was the sole developer of the Experience API layer on a new full-stack system.',
   links: {
