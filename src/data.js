@@ -1,11 +1,16 @@
-// All site content lives here. Update this file when your resume changes.
+// All site content lives here. Wording mirrors the master resume bank (v20)
+// under its application-workflow rules: every claim traces to the bank, no
+// invented or upgraded scope, internal platform names stay genericized, and
+// Python/SQL stay off the skills lists. Update the bank first, then mirror
+// changes here.
 
 export const profile = {
   name: 'Joshua Walulik',
-  title: 'Software Engineer at Wells Fargo',
+  title: 'Software Engineer',
   location: 'Scottsdale, AZ',
+  availability: 'Open to new opportunities',
   email: 'joshuawalulik@gmail.com',
-  bio: 'Full-stack software engineer with 3+ years at Wells Fargo, working across React/Node UIs, .NET microservices, and Java microservices. I take UI modernization, APIs, CI/CD pipelines, and performance testing from design to production.',
+  bio: 'Software Engineer with 3+ years at Wells Fargo building React and TypeScript front-ends, Node.js Experience APIs, and .NET and Java Spring Boot microservices. Owned enhancements on a core loan origination service processing 25,000 to 30,000 applications daily and was the sole developer of the Experience API layer on a new full-stack system.',
   links: {
     github: 'https://github.com/joshuawalulik',
     linkedin: 'https://www.linkedin.com/in/joshuawalulik/',
@@ -16,28 +21,29 @@ export const experience = [
   {
     role: 'Software Engineer',
     company: 'Wells Fargo',
-    dates: 'Jul 2024 – Present',
-    location: 'Chandler, AZ (Hybrid)',
+    dates: 'Jul 2024 – Nov 2026',
+    location: 'Chandler, AZ',
     bullets: [
-      'Recognized as one of very few engineers in the organization proficient in all three core stacks: React/Node UI, .NET microservices, and Java microservices',
-      'Led UI modernization, migrating 6+ UI components to OpenShift Container Platform lower environments',
-      'Designed, built, and deployed business-facing UI screens in Cloud Foundry — with editing, filtering, and role-based permission features — owning the full SDLC from design to production',
-      'Developed experience APIs connecting the UI layer to domain microservices backed by MongoDB',
-      'Pioneered BlazeMeter performance testing for UI components on the team, extending coverage to Kafka topics and .NET API endpoints',
-      'Drove platform buildpack upgrades across production and lower environments, leveraging GitHub Copilot and AI-assisted tooling to improve delivery efficiency',
+      'Owned enhancements on a core .NET microservice processing 25,000 to 30,000 auto loan applications daily, part of an initiative replacing a 30-year-old Progress monolith',
+      'Built React/TypeScript screens and the Node Experience API for a campaign management tool letting business teams manage Volkswagen and Audi data used in downstream loan pricing',
+      'Extended the .NET loan application service with Ducati-specific application comments published over Kafka to downstream services, supporting a separate intake path for the partnership’s second launch phase',
+      'Diagnosed a production Kafka serialization failure during a partner pilot in under 10 minutes using Splunk log queries and shipped a same-evening fix restoring event publication',
+      'Built the Node/TypeScript Experience API and its domain service integration as sole developer on a new full-stack system (React/TypeScript, Java Spring Boot, MongoDB) routing work through an organizational hierarchy',
+      'Shipped React and TypeScript features across an internal portal of 15+ screens, including web replacements for legacy green-screen underwriter workflows, from technical design through production release',
+      'Built Java Spring Boot endpoints over MongoDB, joining two related collections in the service layer so the Experience API could serve a detailed screen without client-side assembly',
+      'Used GitHub Copilot as a daily pair and primary debugger and handed scoped tasks to Devin, reviewing every generated change manually before merge',
     ],
   },
   {
     role: 'Technology Analyst',
     company: 'Wells Fargo',
     dates: 'Jul 2023 – Jul 2024',
-    location: 'Chandler, AZ (Hybrid)',
+    location: 'Chandler, AZ',
     bullets: [
-      'Engineered Harness CI/CD pipelines that cut buildpack upgrade times to under 5 minutes; became the recognized Harness expert for the organization',
-      'Pioneered migration of the organization’s UI components from UCD to Harness — authored the migration guidelines and mentored 3 teammates',
-      'Presented the Harness pipeline solution to a leadership forum, driving adoption across the organization and leading its first production use',
-      'Built multiple UI screens for the organization’s first React/Node micro-frontend production release',
-      'Added 200+ automated test cases for a loan application service, covering multi-applicant workflows',
+      'Integrated Harness CI/CD pipelines that cut buildpack upgrade time to under 5 minutes, becoming the team’s go-to resource for CI/CD questions',
+      'Built React/TypeScript screens from Figma and business requirements for the team’s first React/Node micro-frontend production release, extending automation tests and completing release readiness',
+      'Built an automated test suite for a core loan-processing service, adding 200+ test cases and resolving MongoDB data-mapping issues',
+      'Migrated the team’s UI components off legacy deployment tooling onto Harness and wrote the migration guide three teammates used to move their own components',
     ],
   },
   {
@@ -46,8 +52,7 @@ export const experience = [
     dates: 'Jun 2022 – Aug 2022',
     location: 'Chandler, AZ',
     bullets: [
-      'Developed and improved Java APIs that populate backend databases',
-      'Gained foundational experience with enterprise development, Agile/Scrum, and financial technology systems',
+      'Built and improved backend APIs in Java that populated production databases, working inside an enterprise Agile delivery process',
     ],
   },
 ]
@@ -57,21 +62,21 @@ export const projects = [
     name: 'JobSearcher',
     tech: ['Python', 'FastAPI', 'HTMX', 'SQLite', 'MCP'],
     description:
-      'A job-search pipeline that scrapes Greenhouse/Lever/Ashby boards, ranks postings with a deterministic, fully explainable scoring engine, and tracks applications end to end — 300+ tests, an MCP server for AI-assisted tailoring, and a YAML→DOCX resume renderer.',
+      'A job-search pipeline that scrapes Greenhouse, Lever, and Ashby ATS APIs, scores postings deterministically against a keyword profile with human-readable reasons, and tracks applications in a FastAPI and HTMX UI. Integrates with Claude through a custom MCP server and classifies Gmail replies over IMAP, with 300+ pytest tests covering scrapers, scoring, and the web app.',
     link: 'https://github.com/joshuawalulik/jobsearcher',
   },
   {
     name: 'Oura Partner Dashboard',
     tech: ['TypeScript', 'Cloudflare Workers', 'Hono', 'OAuth2'],
     description:
-      'A serverless health dashboard on Cloudflare Workers integrating the Oura API v2 over OAuth2 — two independent auth layers (Cloudflare Access + in-Worker JWT verification), field allowlisting, and a CI pipeline with post-deploy smoke tests.',
+      'A serverless health dashboard on Cloudflare Workers integrating the Oura API v2 over OAuth2, with two independent auth layers (Cloudflare Access plus in-Worker JWT verification), field allowlisting, and a CI pipeline with post-deploy smoke tests.',
     link: 'https://github.com/joshuawalulik/oura-dashboard',
   },
   {
     name: 'Portfolio Website',
     tech: ['React', 'Vite'],
     description:
-      'This site — a fast, single-page portfolio built with React and deployed on GitHub Pages, with a build-time CSP injected via a custom Vite plugin.',
+      'This site: a fast single-page portfolio built with React and deployed on GitHub Pages, with a build-time Content Security Policy injected via a custom Vite plugin.',
     link: 'https://github.com/joshuawalulik/Portfolio-Site',
   },
 ]
@@ -79,40 +84,42 @@ export const projects = [
 export const skills = [
   {
     group: 'Frontend',
-    items: ['React.js', 'Node.js', 'JavaScript', 'HTML & CSS', 'Micro Frontend (MFE) Architecture'],
+    items: ['React.js', 'TypeScript', 'JavaScript', 'HTML', 'CSS', 'Micro Frontend Architecture', 'Material UI', 'Figma'],
   },
   {
     group: 'Backend',
-    items: ['.NET Microservices', 'Java', 'Experience APIs', 'REST APIs', 'MongoDB', 'Kafka', 'Python', 'SQL'],
+    items: ['Node.js', 'REST & Experience APIs', 'Java', 'Spring Boot', '.NET', 'C#', 'MongoDB', 'Kafka'],
   },
   {
-    group: 'DevOps & Cloud',
-    items: ['Harness CI/CD', 'PCF', 'OpenShift (OCP)', 'Git', 'GitHub Copilot', 'BlazeMeter'],
+    group: 'Testing & Observability',
+    items: ['Jest', 'Playwright', 'BlazeMeter', 'JMeter', 'Performance & NFR Testing', 'Splunk'],
   },
   {
-    group: 'Methodologies',
-    items: ['Agile / Scrum', 'SDLC', 'NFR Testing', 'Performance Testing'],
+    group: 'DevOps, Cloud & AI Tools',
+    items: ['Harness CI/CD', 'OpenShift', 'PCF', 'Git', 'GitHub Copilot', 'Devin'],
   },
 ]
 
 export const education = [
   {
-    school: 'Arizona State University — W. P. Carey School of Business',
-    degree: 'B.S. Computer Information Systems',
-    dates: '2019 – 2023',
+    school: 'W. P. Carey School of Business, Arizona State University',
+    degree: 'B.S., Computer Information Systems',
+    dates: 'May 2023',
     details: 'Minor in Psychology · Certificate in Applied Business Data Analytics',
   },
 ]
 
-export const certificates = [
+export const additional = [
   {
-    name: 'Microsoft Certified: Azure Fundamentals (AZ-900)',
-    issuer: 'Microsoft',
-    date: 'Aug 2022',
+    label: 'Certifications',
+    items: 'Microsoft Azure Fundamentals (AZ-900); NSE 1 Network Security Associate, Fortinet',
   },
   {
-    name: 'NSE 1 Network Security Associate',
-    issuer: 'Fortinet',
-    date: 'Sep 2022',
+    label: 'Interests',
+    items: 'Card collecting, gaming, reading, rating restaurants',
+  },
+  {
+    label: 'Currently learning',
+    items: 'Python, retrieval-augmented generation (RAG), agentic LLM workflows (Claude Code, MCP)',
   },
 ]

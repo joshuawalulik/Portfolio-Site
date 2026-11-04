@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { profile, experience, projects, skills, education, certificates } from './data.js'
+import { profile, experience, projects, skills, education, additional } from './data.js'
 
 const GitHubIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
@@ -121,7 +121,10 @@ export default function App() {
           <h1>{profile.name}</h1>
           <div className="tagline">{profile.title}</div>
           <p className="bio">{profile.bio}</p>
-          <div className="meta">{profile.location}</div>
+          <div className="meta">
+            {profile.location}
+            {profile.availability ? <span className="availability"> · {profile.availability}</span> : null}
+          </div>
           <div className="hero-links">
             <a className="btn primary" href={`mailto:${profile.email}`}>
               Get in touch
@@ -207,14 +210,11 @@ export default function App() {
             </div>
           </div>
         ))}
-        <div className="certs">
-          {certificates.map((cert) => (
-            <div className="cert" key={cert.name}>
-              <div>
-                <div className="name">{cert.name}</div>
-                <div className="issuer">{cert.issuer}</div>
-              </div>
-              <div className="date">{cert.date}</div>
+        <div className="additional">
+          {additional.map((row) => (
+            <div className="additional-row" key={row.label}>
+              <div className="label">{row.label}</div>
+              <div className="items">{row.items}</div>
             </div>
           ))}
         </div>
