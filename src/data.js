@@ -116,7 +116,7 @@ export const additional = [
   },
   {
     label: 'Interests',
-    items: 'Card collecting, gaming, reading, rating restaurants',
+    items: 'Swimming, volunteering, card collecting, gaming, reading, rating restaurants',
   },
   {
     label: 'Currently learning',
