@@ -28,7 +28,7 @@ export const experience = [
       'Built React/TypeScript screens and the Node Experience API for a campaign management tool letting business teams manage Volkswagen and Audi data used in downstream loan pricing',
       'Extended the .NET loan application service with Ducati-specific application comments published over Kafka to downstream services, supporting a separate intake path for the partnership’s second launch phase',
       'Diagnosed a production Kafka serialization failure during a partner pilot in under 10 minutes using Splunk log queries and shipped a same-evening fix restoring event publication',
-      'Built the Node/TypeScript Experience API and its domain service integration as sole developer on a new full-stack system (React/TypeScript, Java Spring Boot, MongoDB) routing work through an organizational hierarchy',
+      'Built the Node/TypeScript Experience API layer of a new full-stack system as its sole developer, integrating it with a Java Spring Boot domain service on MongoDB to route loan applications to underwriters',
       'Shipped React and TypeScript features across an internal portal of 15+ screens, including web replacements for legacy green-screen underwriter workflows, from technical design through production release',
       'Built Java Spring Boot endpoints over MongoDB, joining two related collections in the service layer so the Experience API could serve a detailed screen without client-side assembly',
       'Used GitHub Copilot as a daily pair and primary debugger and handed scoped tasks to Devin, reviewing every generated change manually before merge',
@@ -66,7 +66,7 @@ export const projects = [
     link: 'https://github.com/joshuawalulik/jobsearcher',
   },
   {
-    name: 'Oura Partner Dashboard',
+    name: 'Oura Dashboard',
     tech: ['TypeScript', 'Cloudflare Workers', 'Hono', 'OAuth2'],
     description:
       'A serverless health dashboard on Cloudflare Workers integrating the Oura API v2 over OAuth2, with two independent auth layers (Cloudflare Access plus in-Worker JWT verification), field allowlisting, and a CI pipeline with post-deploy smoke tests.',
@@ -98,6 +98,10 @@ export const skills = [
     group: 'DevOps, Cloud & AI Tools',
     items: ['Harness CI/CD', 'OpenShift', 'PCF', 'Git', 'GitHub Copilot', 'Devin'],
   },
+  {
+    group: 'Personal Projects',
+    items: ['Python', 'FastAPI', 'SQLite', 'Cloudflare Workers', 'Hono', 'MCP'],
+  },
 ]
 
 export const education = [
@@ -116,7 +120,7 @@ export const additional = [
   },
   {
     label: 'Interests',
-    items: 'Card collecting, gaming, reading, rating restaurants',
+    items: 'Swimming, volunteering, card collecting, gaming, reading, rating restaurants',
   },
   {
     label: 'Currently learning',
