@@ -28,11 +28,9 @@ const ChevronDownIcon = () => (
 function Section({ id, title, children }) {
   return (
     <section className="screen section" id={id}>
-      <div className="section-scroll">
-        <div className="container">
-          <h2>{title}</h2>
-          {children}
-        </div>
+      <div className="container">
+        <h2>{title}</h2>
+        {children}
       </div>
     </section>
   )
@@ -40,6 +38,7 @@ function Section({ id, title, children }) {
 
 const navItems = ['Experience', 'Projects', 'Skills', 'Education']
 const screenIds = ['top', ...navItems.map((item) => item.toLowerCase())]
+const navHeight = 64
 
 export default function App() {
   const [active, setActive] = useState('top')
@@ -63,15 +62,13 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    // Screens are exactly (viewport - nav) tall and snap to multiples of that
-    // height, so the active section falls straight out of the scroll offset.
+    // Section heights depend on content and viewport, so read live positions.
     const update = () => {
-      const snapHeight = window.innerHeight - 64
-      const index = Math.min(
-        screenIds.length - 1,
-        Math.max(0, Math.round(window.scrollY / snapHeight)),
+      const probe = navHeight + (window.innerHeight - navHeight) / 3
+      const current = screenIds.filter(
+        (id) => document.getElementById(id).getBoundingClientRect().top <= probe,
       )
-      setActive(screenIds[index])
+      setActive(current.at(-1) ?? 'top')
     }
     update()
     window.addEventListener('scroll', update, { passive: true })
