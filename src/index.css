@@ -23,29 +23,22 @@
 
 html {
   scroll-padding-top: 64px;
-  scroll-snap-type: y proximity;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
-/* One full viewport per section (64px = nav height) */
+/* Short sections fill the screen below the 64px nav; tall ones grow and scroll
+   with the page. svh, not dvh: dvh changes as a mobile address bar collapses,
+   which would resize every section mid-scroll. */
 .screen {
-  height: calc(100vh - 64px);
-  height: calc(100dvh - 64px);
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.section-scroll {
-  flex: 1;
-  overflow-y: auto;
+  min-height: calc(100vh - 64px);
+  min-height: calc(100svh - 64px);
   display: flex;
   flex-direction: column;
   padding: 48px 0 40px;
 }
 
-/* margin:auto centers short content but keeps the top reachable when it overflows */
-.section-scroll > .container {
+.screen > .container {
   margin: auto;
   width: 100%;
 }
@@ -192,9 +185,15 @@ a:hover {
 }
 
 .nav-links a:hover {
-  color: var(--text);
-  background: var(--bg-subtle);
   text-decoration: none;
+}
+
+/* Touch screens keep :hover after a tap, which would leave a stuck pill */
+@media (hover: hover) {
+  .nav-links a:hover {
+    color: var(--text);
+    background: var(--bg-subtle);
+  }
 }
 
 .nav-links a.active {
@@ -230,8 +229,25 @@ a:hover {
   }
 
   .nav-links a {
+    display: block;
     font-size: 12.5px;
-    padding: 6px 7px;
+    padding: 12px 7px;
+  }
+
+  .screen {
+    padding: 36px 0 32px;
+  }
+
+}
+
+@media (max-width: 360px) {
+  .nav-inner {
+    gap: 6px;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    padding: 12px 5px;
   }
 }
 
@@ -239,16 +255,12 @@ a:hover {
 
 .hero {
   position: relative;
+  padding-bottom: 64px;
   background: radial-gradient(
     640px 420px at 82% 12%,
     rgba(39, 67, 227, 0.055),
     transparent 70%
   );
-}
-
-.hero .container {
-  margin: auto;
-  width: 100%;
 }
 
 .hero h1 {
@@ -305,6 +317,38 @@ a:hover {
   transform: translateX(-50%);
   color: var(--faint);
   display: flex;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-bottom: 56px;
+  }
+
+  .hero .tagline,
+  .hero .bio,
+  .hero .meta {
+    margin-top: 12px;
+  }
+
+  .hero .bio {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .hero-links {
+    margin-top: 20px;
+    gap: 6px;
+  }
+}
+
+@media (max-height: 520px) {
+  .hero {
+    padding-bottom: 32px;
+  }
+
+  .scroll-cue {
+    display: none;
+  }
 }
 
 /* The page's one authored motion moment: a staged hero arrival.
@@ -394,6 +438,12 @@ a:hover {
   border-color: var(--accent-deep);
 }
 
+@media (max-width: 640px) {
+  .btn {
+    padding: 11px 13px;
+  }
+}
+
 /* ---------- Sections ---------- */
 
 .section {
@@ -417,7 +467,7 @@ a:hover {
 
 .entry {
   display: grid;
-  grid-template-columns: 164px 1fr;
+  grid-template-columns: 164px minmax(0, 1fr);
   gap: 28px;
   padding: 22px 0;
 }
@@ -470,7 +520,7 @@ a:hover {
 
 @media (max-width: 640px) {
   .entry {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 6px;
   }
 }
@@ -479,7 +529,7 @@ a:hover {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -563,7 +613,7 @@ a:hover {
 
 @media (max-width: 640px) {
   .project-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -571,7 +621,7 @@ a:hover {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px 40px;
 }
 
@@ -602,7 +652,7 @@ a:hover {
 
 @media (max-width: 640px) {
   .skills-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
 }
@@ -650,7 +700,6 @@ a:hover {
   padding: 40px 0 56px;
   font-size: 13.5px;
   color: var(--text-tertiary);
-  scroll-snap-align: end;
 }
 
 .footer-inner {
